@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Plant Shelf Settings
+{% endblock %}
+
+{% block body %}
+<body>
+    <div class="container">
+        <div class = "row">
+
+            <div id="generic" class="col-lg-9">
+
+                <h1 id="generic">Plant Shelf Settings</h1>
+                {% if username %}
+                    <p>Logged in as {{ username }}<br/>
+                        <a href="{{url_for('logout')}}">Logout</a>
+
+
+                    </p>
+                    {% if settings %}
+                        <h2>Current Settings:</h2>
+                        <table>
+                            <tr>
+                                <th>Sunrise Time</th>
+                                <th>Sunset Time</th>
+                            </tr>
+                            
+                            <tr>
+                                <td>{{settings[0]}}</td>
+                                <td>{{settings[1]}}</td>                                
+                            </tr>
+                        </table>
+                        <a href="{{url_for('update_settings')}}">Want to change the settings?</a>
+                    {% else %}
+                        <p>No settings to dispay</p>
+                    {% endif %}
+
+                {% else %}
+                    <p>Not logged in<br />
+                        <a href="{{url_for('login')}}">Please log in.</a>
+                    </p>
+                {% endif %}
+            </div>
+
+
+
+</body>
+
+{% endblock %}

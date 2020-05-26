@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Project1 Book Database
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class = "row">
+            
+        <div class="col-lg-9">
+            {% if username %}
+                {{message}}
+                <a href="{{url_for('index')}}">Return home</a>
+
+
+            {% else %}
+                {{message}}
+                <h1>Please log in</h1>
+                <form action="{{ url_for('login') }}" method="post">
+            
+                    <div class="form-group">
+                        <input class="form-control" name="username" placeholder="username" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <input class="form-control" name="password" type="password" placeholder="password" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <button class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

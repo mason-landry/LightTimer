@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Plant Shelf Settings
+{% endblock %}
+
+{% block body %}
+<body>
+    <div class="container">
+        <div class = "row">
+            <div id="generic" class="col-lg-9">
+                {% if username %}
+                    <p>Logged in as {{ username }}<br/>
+                        <a href="{{url_for('logout')}}">Logout</a>
+                    {% if settings %}
+                        <h2>Current Settings:</h2>
+                        <table>
+                            <tr>
+                                <th>Sunrise Time</th>
+                                <th>Sunset Time</th>
+                            </tr>
+                            
+                            <tr>
+                                <td>{{settings[0]}}</td>
+                                <td>{{settings[1]}}</td>                                
+                            </tr>
+                        </table>
+                        <h2>Enter New Settings:</h2>
+                        <form id="generic" action="{{ url_for('update_settings') }}" method="post">
+                            <div class="form-group">
+                                <input class="form-control" name="start_time" placeholder="{{settings[0]}}" minlength="8" maxlength="8">
+                            </div>
+                    
+                            <div class="form-group">
+                                <input class="form-control" name="stop_time" placeholder="{{settings[1]}}"  minlength="8" maxlength="8">
+                            </div>
+                    
+                            <div class="form-group">
+                                <button class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                        {{message}}
+                    {% else %}
+                        <p>No settings to dispay</p>
+                        <h2>Enter New Settings:</h2>
+                        <form id="generic" action="{{ url_for('update_settings') }}" method="post">
+                            <div class="form-group">
+                                <input class="form-control" name="start_time" placeholder="e.g. 07:00:00" minlength="8" maxlength="8">
+                            </div>
+                    
+                            <div class="form-group">
+                                <input class="form-control" name="stop_time" placeholder="e.g. 23:00:00"  minlength="8" maxlength="8">
+                            </div>
+                    
+                            <div class="form-group">
+                                <button class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    {% endif %}
+
+                {% else %}
+                    <p>Not logged in<br />
+                        <a href="{{url_for('login')}}">Please log in.</a>
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
